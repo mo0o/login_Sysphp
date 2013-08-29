@@ -17,7 +17,7 @@ class User {
 
 		if(!empty($name) && !empty($pass)) {
 
-			$db_PW = "";
+			$db_PW = " ";
 
 			$salt = sha1($pass);
 			$db_PW = sha1($salt.$pass);
@@ -40,7 +40,7 @@ class User {
 
 			} else {
 
-				echo "Username [".$name."] or Password [".$pass."] Incorrect.";
+				echo "Username [".$name."] or Password [".$db_PW."] Incorrect.";
 				echo "<br />";
 				echo "RowCount: ".$st->rowCount();
 
@@ -75,7 +75,7 @@ class User {
 				echo "Username Unavailable count: ".$st->rowCount();
 			} else {
 
-					$salt = "";
+					$salt = " ";
 					$page = 'index.php';
 
 					$salt = sha1($pass);
