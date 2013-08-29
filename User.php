@@ -17,7 +17,7 @@ class User {
 
 		if(!empty($name) && !empty($pass)) {
 
-		session_start();
+		
 
 			$salt = md5($pass);
 			$pass = md5($salt.$pass);
@@ -38,11 +38,12 @@ class User {
 				//$st->bindParam(1, $name);
 				//$st->bindParam(2, $crypt_pass);
 				//$st->execute();
+				session_start();
 
 				$_SESSION["auth_username"] = $name;
 				
 				header('Location:'.$start);
-				echo " HOME PAGE OK ".$name;
+				//echo " HOME PAGE OK ".$name;
 
 			} else {
 
