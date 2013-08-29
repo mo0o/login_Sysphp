@@ -43,7 +43,7 @@ class User {
 				$_SESSION["auth_username"] = $name;
 				
 				header('Location:'.$start);
-				//echo " HOME PAGE OK ".$name;
+				exit;
 
 			} else {
 
