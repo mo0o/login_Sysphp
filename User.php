@@ -17,27 +17,20 @@ class User {
 
 		if(!empty($name) && !empty($pass)) {
 
-		
+			$db_PW = "";
 
-			$salt = md5($pass);
-			$pass = md5($salt.$pass);
+			$salt = sha1($pass);
+			$db_PW = sha1($salt.$pass);
 			
 			$st = $this->db->prepare("SELECT * FROM users WHERE name=? AND pass=?");
-			//$st = $this->db->prepare("select * from users where name=?");
 			$st->bindParam(1, $name);
-			$st->bindParam(2, $pass);
+			$st->bindParam(2, $db_PW);
 			$st->execute();
-
-					//echo "Row count: ".$st->rowCount();
 
 			if($st->rowCount() == 1) {
 
 				$start = 'home.php';
 
-				//$st = $this->db->prepare("UPDATE users SET active='1' WHERE name=? and pass=?");
-				//$st->bindParam(1, $name);
-				//$st->bindParam(2, $crypt_pass);
-				//$st->execute();
 				session_start();
 
 				$_SESSION["auth_username"] = $name;
@@ -82,18 +75,20 @@ class User {
 				echo "Username Unavailable count: ".$st->rowCount();
 			} else {
 
+					$salt = "";
 					$page = 'index.php';
 
-					$salt = md5($pass);
-					$pass = md5($salt.$pass);
+					$salt = sha1($pass);
+					$db_PW = sha1($salt.$pass);
 
 					$st = $this->db->prepare("INSERT INTO users (name, pass, role) VALUES (?, ?, ?)");
 					$st->bindParam(1, $name);
-						$st->bindParam(2, $pass);
+						$st->bindParam(2, $db_PW);
 						$st->bindParam(3, $role);
 						$st->execute();		
 
 						header('Location:'.$page);
+
 			
 			} 
 		}
