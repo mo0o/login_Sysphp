@@ -22,7 +22,7 @@ class User {
 			$salt = md5($pass);
 			$pass = md5($salt.$pass);
 			
-			$st = $this->db->prepare("select * from users where name=? and pass=?");
+			$st = $this->db->prepare("SELECT * FROM users WHERE name=? AND pass=?");
 			//$st = $this->db->prepare("select * from users where name=?");
 			$st->bindParam(1, $name);
 			$st->bindParam(2, $pass);
