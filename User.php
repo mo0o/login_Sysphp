@@ -22,9 +22,9 @@ class User {
 			$salt = sha1($pass);
 			$db_PW = sha1($salt.$pass);
 			
-			$st = $this->db->prepare("SELECT * FROM users WHERE name=? AND pass=?");
+			$st = $this->db->prepare("SELECT * FROM users WHERE name=?");
 			$st->bindParam(1, $name);
-			$st->bindParam(2, $db_PW);
+			//$st->bindParam(2, $db_PW);
 			$st->execute();
 
 			if($st->rowCount() == 1) {
