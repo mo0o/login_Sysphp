@@ -19,8 +19,8 @@ class User {
 
 			$db_PW = " ";
 
-			$salt = sha1($pass);
-			$db_PW = sha1($salt.$pass);
+			$salt = SHA1($pass);
+			$db_PW = SHA1($salt.$pass);
 			
 			$st = $this->db->prepare("SELECT * FROM users WHERE name=?");
 			$st->bindParam(1, $name);
@@ -75,11 +75,10 @@ class User {
 				echo "Username Unavailable count: ".$st->rowCount();
 			} else {
 
-					$salt = " ";
 					$page = 'index.php';
 
-					$salt = sha1($pass);
-					$db_PW = sha1($salt.$pass);
+					$salt = SHA1($pass);
+					$db_PW = SHA1($salt.$pass);
 
 					$st = $this->db->prepare("INSERT INTO users (name, pass, role) VALUES (?, ?, ?)");
 					$st->bindParam(1, $name);
